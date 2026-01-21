@@ -1,10 +1,19 @@
 <template>
   <v-container>
-    <v-card class="pa-4">
-      <h2>Customer Home</h2>
-      <v-btn color="primary" class="mt-4">
-        Sepete Ekle
-      </v-btn>
-    </v-card>
+    <v-row>
+      <v-col
+        v-for="product in products"
+        :key="product.id"
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <ProductCard :product="product" />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
+<script setup lang="ts">
+import { products } from '@/data/product'
+import ProductCard from '@/components/ProductCard.vue'
+</script>
