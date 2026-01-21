@@ -1,5 +1,3 @@
 <template>
-  <v-container>
-    <h1>Admin Dashboard</h1>
-  </v-container>
+  <h2>Admin Dashboard</h2>
 </template>
