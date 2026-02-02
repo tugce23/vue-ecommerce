@@ -1,4 +1,5 @@
 import 'vuetify/styles'
+import '@mdi/font/css/materialdesignicons.css'
 import { createVuetify } from 'vuetify'
 
 // 👇 BUNLAR EKSİKTİ
@@ -7,7 +8,10 @@ import * as directives from 'vuetify/directives'
 
 const vuetify = createVuetify({
   components,
-  directives
+  directives,
+  icons: {
+    defaultSet: 'mdi',
+  },
 })
 
 export default vuetify

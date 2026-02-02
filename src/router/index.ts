@@ -5,6 +5,7 @@ import AdminDashboard from '@/pages/admin/Dashboard.vue'
 
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
+import Cart from '@/pages/Cart.vue'
 const routes = [
   {
     path: '/',
@@ -27,7 +28,12 @@ const routes = [
         component: AdminDashboard
       }
     ]
-  }
+  },
+  {
+  path: '/cart',
+  name: 'cart',
+  component: Cart,
+}
 ]
 
 const router = createRouter({
