@@ -12,8 +12,18 @@
       </v-card-title>
 
       <v-card-text>
-        <div>Adet: {{ item.quantity }}</div>
+        <div class="d-flex align-center mb-2">
+          <v-btn size="small" @click="cartStore.decrease(item.id)">-</v-btn>
+
+          <span class="mx-3 font-weight-medium">
+            {{ item.quantity }}
+          </span>
+
+          <v-btn size="small" @click="cartStore.increase(item.id)">+</v-btn>
+        </div>
+
         <div>Fiyat: {{ item.price }} ₺</div>
+        <div>Ara Toplam: {{ item.price * item.quantity }} ₺</div>
       </v-card-text>
     </v-card>
 
@@ -22,6 +32,7 @@
     <h3>Toplam: {{ totalPrice }} ₺</h3>
   </v-container>
 </template>
+
 
 <script setup lang="ts">
 import { computed } from 'vue'

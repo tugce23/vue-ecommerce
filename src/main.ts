@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp,watch } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
@@ -10,3 +10,17 @@ app.use(createPinia())
 app.use(router)
 app.use(vuetify)   // 👈 V-APP BURADA TANINIR
 app.mount('#app')
+
+import { useCartStore } from '@/stores/cart.store'
+
+const cart = useCartStore()
+
+cart.items = JSON.parse(localStorage.getItem('cart') || '[]')
+
+watch(
+  () => cart.items,
+  items => {
+    localStorage.setItem('cart', JSON.stringify(items))
+  },
+  { deep: true }
+)
