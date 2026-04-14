@@ -6,6 +6,7 @@ import AdminDashboard from '@/pages/admin/Dashboard.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import Cart from '@/pages/Cart.vue'
+import ProductDetail from '@/pages/ProductDetail.vue'
 const routes = [
   {
     path: '/',
@@ -15,9 +16,16 @@ const routes = [
         path: '',
         name: 'Home',
         component: Home
-      }
+      },
+      {
+      path: 'product/:id',
+      name: 'ProductDetail',
+      component: ProductDetail,
+      props: true
+    },
     ]
   },
+  
   {
     path: '/admin',
     component: AdminLayout,
