@@ -1,5 +1,6 @@
 <template>
-<v-card class="product-card" elevation="0">
+  
+<v-card class="product-card "  elevation="0" @click="goToDetail">
 
   <!-- IMAGE -->
   <div class="image-wrapper">
@@ -39,7 +40,7 @@
       block
       color="black"
       class="mt-2 add-btn"
-      @click="addProduct(product)"
+      @click.stop="addProduct(product)"
     >
       Sepete Ekle
     </v-btn>
@@ -56,7 +57,9 @@ import type { Product } from '@/types/Product'
 import { ref ,computed} from 'vue'
 import { useCartStore } from '@/stores/cart.store'
 const cart = useCartStore()
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 
 const props = defineProps<{
   product: Product
@@ -78,6 +81,10 @@ const discountPercent = computed(() => {
   )
 })
 
+
+const goToDetail = () => {
+  router.push(`/product/${props.product.id}`)
+}
 </script>
 <style lang="css">
 .product-card {
