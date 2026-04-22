@@ -6,7 +6,10 @@ import AdminDashboard from '@/pages/admin/Dashboard.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import Cart from '@/pages/Cart.vue'
+import Login from '@/pages/Login.vue'
+import Register from '@/pages/Register.vue'
 import ProductDetail from '@/pages/ProductDetail.vue'
+import { useAuthStore } from '../stores/auth.store'
 const routes = [
   {
     path: '/',
@@ -29,6 +32,7 @@ const routes = [
   {
     path: '/admin',
     component: AdminLayout,
+    meta:{requiresAuth:true},
     children: [
       {
         path: '',
@@ -40,7 +44,18 @@ const routes = [
   {
   path: '/cart',
   name: 'cart',
+  meta:{requiresAuth:true},
   component: Cart,
+},
+{
+  path: '/login',
+  name: 'login',
+  component: Login
+},
+{
+  path:'/register',
+  name:'register',
+  component:Register
 }
 ]
 
@@ -49,4 +64,17 @@ const router = createRouter({
   routes
 })
 
+
+router.beforeEach((to,from,next)=>{
+const auth=useAuthStore()
+
+if(to.meta.requiresAuth && !auth.token){
+    next({
+      path:'/login',
+      query:{redirect:to.fullPath}
+    })
+  }else{
+    next()
+  }
+})
 export default router
