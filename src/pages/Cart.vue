@@ -29,7 +29,16 @@
 
     <v-divider class="my-4" />
 
-    <h3>Toplam: {{ totalPrice }} ₺</h3>
+  <div class="d-flex justify-space-between align-center">
+  <h3>Toplam: {{ totalPrice }} ₺</h3>
+
+  <v-btn
+    color="success"
+    @click="goToCheckout"
+  >
+    Ödeme Yap
+  </v-btn>
+</div>
   </v-container>
 </template>
 
