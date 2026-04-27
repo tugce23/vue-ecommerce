@@ -11,7 +11,7 @@
     <v-spacer />
 
     <!-- Auth butonları -->
-<div v-if="!isLoggedIn">
+<div v-if="!authStore.token">
  <v-btn variant="text" to="/login">Login
  <template v-slot:append>
         <v-icon     icon="mdi-account" ></v-icon>
@@ -21,7 +21,7 @@
 </div>
 <div v-else>
   <v-btn variant="text" to="/profile">Profile</v-btn>
-  <v-btn variant="text" @click="logout">Logout</v-btn>
+  <v-btn variant="text" @click="authStore.logout()">Logout</v-btn>
 </div>
     <!-- Cart -->
     <v-btn icon to="/cart">
@@ -44,7 +44,9 @@
 <script setup lang="ts">
 import { ref,computed } from 'vue'
 import { useCartStore } from '@/stores/cart'
+import { useAuthStore } from '../stores/auth.store';
 
+const authStore=useAuthStore()
 const cartStore = useCartStore()
 
 const cartCount = computed(() =>
@@ -52,8 +54,5 @@ const cartCount = computed(() =>
 )
 
 
-const isLoggedIn = ref(false)
-const logout = () => {
-  isLoggedIn.value = false
-}
+
 </script>
