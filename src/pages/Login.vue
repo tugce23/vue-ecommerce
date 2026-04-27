@@ -28,13 +28,14 @@
 <script lang="ts" setup>
 import {ref} from 'vue'
 import { useAuthStore } from '../stores/auth.store';
-
+import { useRouter } from 'vue-router'
 const authStore=useAuthStore()
 const email=ref('')
 const password=ref('')
-
+const router = useRouter()
 const login=()=>{
     authStore.login(email.value,password.value)
+    router.push('/')
 }
 
 </script>
