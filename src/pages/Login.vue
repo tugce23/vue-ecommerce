@@ -17,6 +17,8 @@
         label="Password"
       ></v-text-field>
       <v-btn class="mt-2" size="large"  color="success" type="submit" block>Login</v-btn>
+      <div class="d-flex justify-center"> Ya da </div>
+        <v-btn class="mt-2" size="large"  color="primary" block to="/register">Register</v-btn>
     </v-form>
   </v-sheet>
 </v-card>
