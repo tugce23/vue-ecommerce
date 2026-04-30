@@ -5,7 +5,7 @@
   <!-- IMAGE -->
   <div class="image-wrapper">
     <v-img
-      :src="product.image"
+      :src="product.imageUrl"
       height="240"
       cover
     />
@@ -18,7 +18,7 @@
   <v-card-text class="pa-3">
 
     <div class="title">
-      {{ product.title }}
+      {{ product.name }}
     </div>
 
     <div class="price-row">
