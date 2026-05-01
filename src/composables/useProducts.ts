@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import { fetchProducts } from '@/services/product.service'
+import { fetchProducts ,createProduct} from '@/services/product.service'
 
 export function useProducts() {
   const products = ref([])
@@ -39,6 +39,10 @@ export function useProducts() {
     loadProducts()
   }
 
+  async function addProduct(product: any) {
+  await createProduct(product)
+  await loadProducts() // listeyi yenile
+}
   let timer: any
 
 function onSearch(value: string) {
@@ -49,6 +53,8 @@ function onSearch(value: string) {
     page.value = 1
     loadProducts()
   }, 400)
+
+  
 }
 
   return {
@@ -62,6 +68,7 @@ function onSearch(value: string) {
   categories,
   loadProducts,
   changePage,
-  onSearch
+  onSearch,
+  addProduct
   }
 }

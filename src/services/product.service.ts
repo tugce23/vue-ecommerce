@@ -43,3 +43,7 @@ export async function fetchProducts(params: any) {
     total: res.data.length
   }
 }
+
+export const createProduct = (data: any) => {
+  return api.post("/products", data);
+};

@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '@/pages/Home.vue'
 import AdminDashboard from '@/pages/admin/Dashboard.vue'
-
+import AddProduct from "@/pages/admin/AddProduct.vue"
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import Cart from '@/pages/Cart.vue'
@@ -38,6 +38,11 @@ const routes = [
         path: '',
         name: 'AdminDashboard',
         component: AdminDashboard
+      },
+      {
+        path: 'addProduct',
+        name: 'AddProduct',
+        component: AddProduct
       }
     ]
   },
@@ -65,15 +70,16 @@ const router = createRouter({
 })
 
 
-router.beforeEach((to,from,next)=>{
-const auth=useAuthStore()
-
-if(to.meta.requiresAuth && !auth.token){
+router.beforeEach((to, from, next) => {
+  const auth = useAuthStore()
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  if (requiresAuth && !auth.token) {
     next({
-      path:'/login',
-      query:{redirect:to.fullPath}
+      path: '/login',
+      query: { redirect: to.fullPath }
     })
-  }else{
+  } else {
+    console.log("ALLOW")
     next()
   }
 })
