@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '@/pages/Home.vue'
 import AdminDashboard from '@/pages/admin/Dashboard.vue'
+import AdminProducts from "@/pages/admin/AdminProducts.vue"
 import AddProduct from "@/pages/admin/AddProduct.vue"
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
@@ -10,6 +11,7 @@ import Login from '@/pages/Login.vue'
 import Register from '@/pages/Register.vue'
 import ProductDetail from '@/pages/ProductDetail.vue'
 import { useAuthStore } from '../stores/auth.store'
+import { components } from 'vuetify/dist/vuetify.js'
 const routes = [
   {
     path: '/',
@@ -43,6 +45,11 @@ const routes = [
         path: 'addProduct',
         name: 'AddProduct',
         component: AddProduct
+      },
+      {
+        path:'products',
+        name:'AdminProducts',
+        component:AdminProducts
       }
     ]
   },
