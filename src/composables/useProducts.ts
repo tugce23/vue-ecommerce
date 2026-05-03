@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import { fetchProducts ,createProduct} from '@/services/product.service'
+import { fetchProducts ,createProduct,fetchProductById} from '@/services/product.service'
 
 export function useProducts() {
   const products = ref([])
@@ -20,6 +20,10 @@ export function useProducts() {
   const set = new Set(products.value.map(p => p.category))
   return ['all', ...set]
 })
+ async function getProduct(id: number) {
+  const res = await fetchProductById(id)
+  return res.data
+}
   async function loadProducts() {
     loading.value = true
     const res = await fetchProducts({
@@ -54,7 +58,7 @@ function onSearch(value: string) {
     loadProducts()
   }, 400)
 
-  
+ 
 }
 
   return {
@@ -69,6 +73,7 @@ function onSearch(value: string) {
   loadProducts,
   changePage,
   onSearch,
-  addProduct
+  addProduct,
+  getProduct
   }
 }

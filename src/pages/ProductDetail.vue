@@ -1,10 +1,10 @@
 <template>
-  <v-container>
+  <v-container>{{ store.getProductById(route.params.id) }}
     <div v-if="product">
       <v-row>
         <!-- Ürün görsel -->
         <v-col cols="12" md="6">
-          <v-img :src="product.image" height="300" contain />
+          <v-img :src="product.imageUrl" height="300" contain />
         </v-col>
 
         <!-- Ürün bilgi -->
@@ -31,24 +31,24 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
+import { computed, onMounted ,ref} from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useProductStore } from '@/stores/product.store'
-
+import { useProducts } from '@/composables/useProducts'
 const route = useRoute()
 const router = useRouter()
 const store = useProductStore()
+const { getProduct } = useProducts()
+
+const product = ref(null)
 
 onMounted(async () => {
-  // refresh durumunda store boş olabilir
-  if (!store.products.length) {
-    await store.fetchProducts()
-  }
+  product.value = await getProduct(Number(route.params.id))
 })
 
-const product = computed(() =>
-  store.getProductById(route.params.id)
-)
+
+
+
 
 const goBack = () => {
   router.back()

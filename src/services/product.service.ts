@@ -47,3 +47,8 @@ export async function fetchProducts(params: any) {
 export const createProduct = (data: any) => {
   return api.post("/products", data);
 };
+
+
+export const fetchProductById = (id: number) => {
+  return api.get(`/products/${id}`)
+}
