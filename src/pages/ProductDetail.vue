@@ -13,7 +13,7 @@
           <p>{{ product.description }}</p>
           <h2>{{ product.price }} ₺</h2>
 
-          <v-btn color="primary" class="mt-4">
+          <v-btn color="primary" class="mt-4" @click="handleAdd">
             Sepete Ekle
           </v-btn>
 
@@ -52,5 +52,14 @@ onMounted(async () => {
 
 const goBack = () => {
   router.back()
+}
+
+
+import { useCart } from '@/composables/useCart'
+
+const { add } = useCart()
+
+const handleAdd = () => {
+  add(product.value)
 }
 </script>
