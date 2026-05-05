@@ -13,13 +13,13 @@
 
       <v-card-text>
         <div class="d-flex align-center mb-2">
-          <v-btn size="small" @click="cartStore.decrease(item.id)">-</v-btn>
+          <v-btn size="small" @click="decrease(item)">-</v-btn>
 
           <span class="mx-3 font-weight-medium">
             {{ item.quantity }}
           </span>
 
-          <v-btn size="small" @click="cartStore.increase(item.id)">+</v-btn>
+          <v-btn size="small" @click="increase(item)">+</v-btn>
         </div>
 
         <div>Fiyat: {{ item.product.price }} ₺</div>
@@ -61,7 +61,7 @@ const totalPrice = computed(() =>
 
 import { useCart } from '@/composables/useCart'
 
-const { items, loadCart } = useCart()
+const { items, loadCart, increase, decrease } = useCart()
 
 onMounted(() => {
   loadCart()

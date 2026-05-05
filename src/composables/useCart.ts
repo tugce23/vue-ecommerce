@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { addToCart, getCart } from '@/services/cart.service'
+import { addToCart, getCart ,updateCartItem} from '@/services/cart.service'
 import { useAuthStore } from '@/stores/auth.store'
 
 export function useCart() {
@@ -19,9 +19,18 @@ export function useCart() {
     items.value = res.data
   }
 
+  async function increase(item: any) {
+  await updateCartItem(item.id, item.quantity + 1)
+  await loadCart()
+}
+
+async function decrease(item: any) {
+  await updateCartItem(item.id, item.quantity - 1)
+  await loadCart()
+}
   return {
     items,
     add,
-    loadCart
+    loadCart,increase,decrease
   }
 }
