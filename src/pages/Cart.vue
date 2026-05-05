@@ -3,12 +3,12 @@
     <h2>Sepetim</h2>
 
     <v-card
-      v-for="item in cartStore.items"
+      v-for="item in items"
       :key="item.id"
       class="mb-3"
     >
       <v-card-title>
-        {{ item.title }}
+        {{ item.product.name }}
       </v-card-title>
 
       <v-card-text>
@@ -22,8 +22,8 @@
           <v-btn size="small" @click="cartStore.increase(item.id)">+</v-btn>
         </div>
 
-        <div>Fiyat: {{ item.price }} ₺</div>
-        <div>Ara Toplam: {{ item.price * item.quantity }} ₺</div>
+        <div>Fiyat: {{ item.product.price }} ₺</div>
+        <div>Ara Toplam: {{ item.product.price * item.quantity }} ₺</div>
       </v-card-text>
     </v-card>
 
@@ -39,12 +39,14 @@
     Ödeme Yap
   </v-btn>
 </div>
+
+ 
   </v-container>
 </template>
 
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted} from 'vue'
 import { useCartStore } from '@/stores/cart'
 
 const cartStore = useCartStore()
@@ -55,4 +57,13 @@ const totalPrice = computed(() =>
     0
   )
 )
+
+
+import { useCart } from '@/composables/useCart'
+
+const { items, loadCart } = useCart()
+
+onMounted(() => {
+  loadCart()
+})
 </script>
