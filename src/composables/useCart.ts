@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { addToCart, getCart ,updateCartItem} from '@/services/cart.service'
 import { useAuthStore } from '@/stores/auth.store'
-
+import { computed } from 'vue'
 export function useCart() {
   const items = ref([])
   const auth = useAuthStore()
@@ -28,9 +28,17 @@ async function decrease(item: any) {
   await updateCartItem(item.id, item.quantity - 1)
   await loadCart()
 }
+
+
+
+const totalPrice = computed(() => {
+  return items.value.reduce((total, item) => {
+    return total + item.product.price * item.quantity
+  }, 0)
+})
   return {
     items,
     add,
-    loadCart,increase,decrease
+    loadCart,increase,decrease,totalPrice
   }
 }

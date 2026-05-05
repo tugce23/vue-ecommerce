@@ -30,7 +30,7 @@
     <v-divider class="my-4" />
 
   <div class="d-flex justify-space-between align-center">
-  <h3>Toplam: {{ totalPrice }} ₺</h3>
+  <h3>Toplam: {{ totalPrice.toFixed(2) }} ₺</h3>
 
   <v-btn
     color="success"
@@ -46,22 +46,10 @@
 
 
 <script setup lang="ts">
-import { computed, onMounted} from 'vue'
-import { useCartStore } from '@/stores/cart'
-
-const cartStore = useCartStore()
-
-const totalPrice = computed(() =>
-  cartStore.items.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  )
-)
-
-
+import {  onMounted} from 'vue'
 import { useCart } from '@/composables/useCart'
 
-const { items, loadCart, increase, decrease } = useCart()
+const { items, loadCart, increase, decrease, totalPrice } = useCart()
 
 onMounted(() => {
   loadCart()
