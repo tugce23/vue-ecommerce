@@ -20,11 +20,15 @@
           </span>
 
           <v-btn size="small" @click="increase(item)">+</v-btn>
+          <v-btn size="small" color="warning" class="ms-2" @click="remove(item)"><v-icon   icon="mdi-delete"></v-icon></v-btn>
         </div>
 
         <div>Fiyat: {{ item.product.price }} ₺</div>
         <div>Ara Toplam: {{ item.product.price * item.quantity }} ₺</div>
+        
       </v-card-text>
+     
+
     </v-card>
 
     <v-divider class="my-4" />
@@ -49,7 +53,7 @@
 import {  onMounted} from 'vue'
 import { useCart } from '@/composables/useCart'
 
-const { items, loadCart, increase, decrease, totalPrice } = useCart()
+const { items, loadCart, increase, decrease, totalPrice ,remove} = useCart()
 
 onMounted(() => {
   loadCart()
