@@ -21,7 +21,7 @@
 </div>
 <div v-else>
   <v-btn variant="text" to="/profile">Profile</v-btn>
-  <v-btn variant="text" @click="authStore.logout()">Logout</v-btn>
+  <v-btn variant="text" @click="logout">Logout</v-btn>
 </div>
     <!-- Cart -->
     <v-btn icon to="/cart">
@@ -45,7 +45,9 @@
 import { ref,computed } from 'vue'
 import { useCartStore } from '@/stores/cart'
 import { useAuthStore } from '../stores/auth.store';
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const authStore=useAuthStore()
 const cartStore = useCartStore()
 
@@ -53,6 +55,9 @@ const cartCount = computed(() =>
   cartStore.items.reduce((total, item) => total + item.quantity, 0)
 )
 
-
+const logout=()=>{
+  authStore.logout();
+  router.push('/')
+}
 
 </script>
