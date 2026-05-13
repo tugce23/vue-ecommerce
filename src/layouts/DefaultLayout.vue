@@ -23,6 +23,11 @@
   <v-btn variant="text" to="/profile">Profile</v-btn>
   <v-btn variant="text" @click="logout">Logout</v-btn>
 </div>
+<div>
+<v-btn v-if="authStore.role === 'Admin'" to="/admin">
+  Admin Panel
+</v-btn>
+</div>
     <!-- Cart -->
     <v-btn icon to="/cart">
       <v-badge

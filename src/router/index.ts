@@ -79,15 +79,22 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const auth = useAuthStore()
+
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
+
   if (requiresAuth && !auth.token) {
-    next({
+    return next({
       path: '/login',
       query: { redirect: to.fullPath }
     })
-  } else {
-    console.log("ALLOW")
-    next()
   }
+
+  if (requiresAdmin && auth.role !== 'Admin') {
+    return next('/')
+  }
+
+  console.log("ALLOW")
+  next()
 })
 export default router
