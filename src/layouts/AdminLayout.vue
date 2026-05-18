@@ -1,4 +1,5 @@
 <template>
+    <v-layout>
   <v-navigation-drawer permanent width="240">
     <v-list nav>
       <v-list-item title="Dashboard" to="/admin" />
@@ -6,7 +7,8 @@
     </v-list>
   </v-navigation-drawer>
 
-    <v-main class="pa-4">
+    <v-main class="ma-2">
     <router-view />
   </v-main>
+  </v-layout>
 </template>

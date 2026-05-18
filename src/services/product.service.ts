@@ -52,3 +52,12 @@ export const createProduct = (data: any) => {
 export const fetchProductById = (id: number) => {
   return api.get(`/products/${id}`)
 }
+
+
+export const getProducts = () => {
+  return api.get('/products')
+}
+
+export const deleteProduct = (id: number) => {
+  return api.delete(`/products/${id}`)
+}
