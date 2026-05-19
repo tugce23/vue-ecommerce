@@ -20,16 +20,17 @@
 </template>
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import { getProducts, deleteProduct } from '@/services/product.service'
+import { productService } from '@/services/product.service'
 const products = ref([])
 
 const loadProducts = async () => {
-  const res = await getProducts()
-  products.value = res.data
+  const res = await productService.getAll()
+  console.log(res,"res")
+  products.value = res.items
 }
 
 const handleDelete = async (id: number) => {
-  await deleteProduct(id)
+  await productService.delete(id)
   await loadProducts()
 }
 

@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue'
-import { fetchProducts ,createProduct,fetchProductById} from '@/services/product.service'
+import { productService } from '@/services/product.service'
 
 export function useProducts() {
   const products = ref([])
@@ -21,12 +21,12 @@ export function useProducts() {
   return ['all', ...set]
 })
  async function getProduct(id: number) {
-  const res = await fetchProductById(id)
+  const res = await productService.getById(id)
   return res.data
 }
   async function loadProducts() {
     loading.value = true
-    const res = await fetchProducts({
+    const res = await productService.getAll({
         page: page.value,
         limit: limit.value,
         search: search.value,
@@ -44,7 +44,7 @@ export function useProducts() {
   }
 
   async function addProduct(product: any) {
-  await createProduct(product)
+  await productService.create(product)
   await loadProducts() // listeyi yenile
 }
   let timer: any
