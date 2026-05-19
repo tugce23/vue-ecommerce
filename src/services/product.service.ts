@@ -33,31 +33,38 @@
 
 import api from "@/services/api.service";
 
-export async function fetchProducts(params: any) {
-  const res = await api.get('/products', {
-    params
-  })
+export const productService = {
+  // GET ALL
+  async getAll(params?: any) {
+    const res = await api.get('/products', { params });
 
-  return {
-    items: res.data,
-    total: res.data.length
+    return {
+      items: res.data,
+      total: res.data.length
+    };
+  },
+
+  // GET BY ID
+  async getById(id: number) {
+    const res = await api.get(`/products/${id}`);
+    return res.data;
+  },
+
+  // CREATE
+  async create(data: any) {
+    const res = await api.post('/products', data);
+    return res.data;
+  },
+
+  // UPDATE
+  async update(id: number, data: any) {
+    const res = await api.put(`/products/${id}`, data);
+    return res.data;
+  },
+
+  // DELETE
+  async delete(id: number) {
+    const res = await api.delete(`/products/${id}`);
+    return res.data;
   }
-}
-
-export const createProduct = (data: any) => {
-  return api.post("/products", data);
 };
-
-
-export const fetchProductById = (id: number) => {
-  return api.get(`/products/${id}`)
-}
-
-
-export const getProducts = () => {
-  return api.get('/products')
-}
-
-export const deleteProduct = (id: number) => {
-  return api.delete(`/products/${id}`)
-}
