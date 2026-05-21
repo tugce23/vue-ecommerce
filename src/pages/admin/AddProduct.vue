@@ -5,7 +5,17 @@
     <v-text-field v-model="form.name" label="Name" />
     <v-text-field v-model="form.description" label="Description" />
     <v-text-field v-model="form.price" label="Price" type="number" />
-    <v-text-field v-model="form.imageUrl" label="Image URL" />
+    <v-file-input
+  label="Product Image"
+  accept="image/*"
+  @change="handleImage"
+/>
+
+<v-img
+  v-if="form.imageUrl"
+  :src="form.imageUrl"
+  height="150"
+/>
     <v-text-field v-model="form.stock" label="Stock" type="number" />
 
     <v-btn color="primary" class="mt-3" @click="submit">
@@ -36,5 +46,14 @@ async function submit() {
   form.price = 0
   form.imageUrl = ''
   form.stock = 0
+}
+
+import { uploadImage } from '@/services/upload.service'
+
+async function handleImage(e: any) {
+  const url = await uploadImage(e)
+  form.imageUrl = `http://localhost:5095${url}`
+  console.log(e)
+console.log(e.target.files)
 }
 </script>
