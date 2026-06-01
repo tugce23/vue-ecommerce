@@ -29,8 +29,8 @@
     <AddProduct ></AddProduct>
     </v-dialog>
     <v-dialog v-model="isUpdateProductForm">
-
-    <UpdateProduct ></UpdateProduct>
+    <UpdateProduct  :product="selectedProduct"
+      @close="isUpdateProductForm = false" @save="updateProduct"></UpdateProduct> 
     </v-dialog>
   </div>
 </template>
@@ -58,12 +58,19 @@ const editProduct = (item:any) => {
 
 const loadProducts = async () => {
   const res = await productService.getAll()
-  console.log(res,"res")
   products.value = res.items
 }
 
 const handleDelete = async (id: number) => {
   await productService.delete(id)
+  await loadProducts()
+}
+
+const updateProduct = async (product:any) => {
+  await productService.update(product.id, product)
+
+  isUpdateProductForm.value = false
+
   await loadProducts()
 }
 
